@@ -1,0 +1,22 @@
+{
+  "name": "check-in-api",
+  "version": "1.0.0",
+  "description": "check-in for Gebeya",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "chek-in",
+    "gebeya"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.3"
+  }
+}
