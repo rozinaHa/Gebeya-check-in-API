@@ -27,8 +27,8 @@ var VisitorSchema = new Schema({
     required: 'Kindly enter the identification number of the visitor'
   },
   scanned_copy: {
-    data: Buffer,
-    contentType: String
+    type: String,
+    required: true
   },
   Created_date: {
     type: Date,
