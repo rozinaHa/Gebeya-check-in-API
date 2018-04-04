@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var routes = require('./src/routes/route');
 
 // ~ loading configuration ~ //
-var config = require('./config');
+var config = require('./src/config');
 
 // ~ Intialize app ~ // 
 var app = express();
