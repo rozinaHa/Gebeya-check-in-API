@@ -20,3 +20,16 @@ exports.read_a_visitor = function(req, res) {
     res.json(visitor);
   });
 };
+
+
+exports.delete_a_visitor = function(req, res) {
+
+
+  visitor.remove({
+    _id: req.params.visitorId
+  }, function(err, visitor) {
+    if (err)
+      res.send(err);
+    res.json({ message: 'Task successfully deleted' });
+  });
+};

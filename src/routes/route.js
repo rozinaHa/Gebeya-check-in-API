@@ -29,17 +29,26 @@ module.exports = function(app){
     });
   });
 
-    app.route('/tasks/:taskId')
-    .get(visitors.read_a_visitor);
-};
-/*exports.create_a_visitor = (upload.single('images'),function(req, res) {
-  //upload.single('images');
-  var new_visitor = new visitor(req.body);
+    app.route('/visitors/:visitorId')
+    .get(visitors.read_a_visitor)
+    .delete(visitors.delete_a_visitor);
 
-  new_visitor.scanned_copy = req.file.path;
-  new_visitor.save(function(err, task) {
+    app.put('/visitors/:visitorId',upload.single('images'),function(req,res){
+      console.log(req.file.filename);
+      console.log(req.body);
+      req.body["scanned_copy"] = "uploads/" + req.file.filename;
+      console.log(req.body);
+      visitor.findOneAndUpdate({_id: req.params.visitorId}, req.body, {new: true}, function(err, visitor) {
+        if (err)
+          res.send(err);
+        res.json(visitor);
+      });
+    });
+};
+/*exports.update_a_visitor = function(req, res) {
+  visitor.findOneAndUpdate({_id: req.params.visitorId}, req.body, {new: true}, function(err, visitor) {
     if (err)
       res.send(err);
     res.json(visitor);
   });
-});*/
+};*/
