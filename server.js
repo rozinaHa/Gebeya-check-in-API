@@ -8,7 +8,7 @@ var routes = require('./src/routes/route');
 // ~ loading configuration ~ //
 var config = require('./src/config');
 
-// ~ Intialize app ~ // 
+// ~ Intialize app ~ //
 var app = express();
 
 mongoose.Promise = global.Promise;
@@ -17,6 +17,7 @@ mongoose.connect(config.MONGODB_URL);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use('/uploads', express.static('public/uploads'));
 routes(app);
 
 app.listen(config.HTTP_PORT,function(){
