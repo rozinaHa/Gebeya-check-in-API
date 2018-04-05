@@ -3,10 +3,9 @@
 
 module.exports = {
     // HTTP PORT
-    HTTP_PORT: 9119,
-  
+    HTTP_PORT: 3000,
+
     // MONGODB URL
-    MONGODB_URL: 'mongodb://localhost/visitordb'
-    
+    MONGODB_URL:process.env.MONGODB||'mongodb://localhost/visitors'
+
 };
-  
