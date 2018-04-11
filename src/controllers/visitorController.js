@@ -3,7 +3,7 @@ var visitor = mongoose.model('Visitors');
 
 
 
-exports.list_all_visitors = function(req,res){
+exports.list_all_visitors = function(req,res,next){
   visitor.find({},function(err,visitor){
     if(err)
       res.send(err);
@@ -11,11 +11,11 @@ exports.list_all_visitors = function(req,res){
   });
 };
 
-exports.create_a_visitor = function(req,res){
+exports.create_a_visitor = function(req,res,next){
   var new_visitor = new visitor(req.body);
   console.log("uploads/" + req.file.filename);
   new_visitor.scanned_copy = "uploads/" + req.file.filename;
-  new_visitor.save(function(err, task) {
+  new_visitor.save(function(err, visitor) {
     if (err)
       res.send(err);
     res.json(visitor);

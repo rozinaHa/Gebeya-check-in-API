@@ -6,6 +6,9 @@ module.exports = {
     HTTP_PORT: 3000,
 
     // MONGODB URL
-    MONGODB_URL:process.env.MONGODB||'mongodb://localhost/visitors'
+    MONGODB_URL:process.env.MONGODB||'mongodb://localhost/visitors',
+
+    //secret word
+    secret:process.env.SECRET||'supersecret'
 
 };
