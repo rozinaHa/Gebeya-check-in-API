@@ -11,12 +11,27 @@ var VisitorSchema = new Schema({
     type: String,
     required: 'Kindly enter the last name of the visitor'
   },
-  company_or_school_name: {
+  category: {
+    type: String,
+    required: 'please enter category of a visitor'
+  },
+  company_name: {
     type: String
+  },
+  school_name: {
+    type:String
+  },
+  Gender: {
+    type: String,
+    require: 'enter gender of a visitor'
   },
   email_or_phone: {
     type: String,
     required: 'Kindly enter the email or phone number of the visitor'
+  },
+  reason: {
+    type: String,
+    required: 'kindly enter reason of visitation'
   },
   identification_type: {
     type: String,
