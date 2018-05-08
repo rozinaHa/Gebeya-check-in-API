@@ -18,6 +18,9 @@ var VisitorSchema = new Schema({
   company_name: {
     type: String
   },
+  company_website: {
+    type: String
+  },
   school_name: {
     type:String
   },

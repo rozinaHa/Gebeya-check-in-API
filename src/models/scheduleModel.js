@@ -19,7 +19,8 @@ var scheduleSchema = new Schema({
   
    },
    dateAndTime : {
-       type : Date
+       type : Date,
+       default: Date.now
    }
 
 });

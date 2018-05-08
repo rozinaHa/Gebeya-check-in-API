@@ -4,6 +4,8 @@ module.exports = function(app){
   var visitor = require('../models/visitorsModel');
   var user = require('../models/UserModel');
   var userController = require('../controllers/userController');
+  var scheduled = require('../models/scheduleModel');
+  var schedule = require('../controllers/scheduleController');
   var multer  = require('multer');
   var verifyToken = require('../controllers/verifyToken');
 
@@ -39,4 +41,16 @@ module.exports = function(app){
     .delete(verifyToken,userController.remove_a_user);
 
     app.post('/users/login',userController.login_a_user);
+
+    app.get('/schedule',schedule.list_all_schedule);
+
+    app.route('/visitors/schedule/:visitorId')
+    .get(schedule.list_all_schedule_of_a_visitor)
+    .post(schedule.create_a_schedule);
+
+    app.route('/schedule/:scheduleId')
+    .get(schedule.read_a_schedule)
+    .put(schedule.update_a_schedule)
+    .delete(schedule.delete_a_schedule);
+    
 };

@@ -9,6 +9,6 @@ module.exports = {
     MONGODB_URL:process.env.MONGODB||'mongodb://localhost/visitors',
 
     //secret word
-    secret:process.env.SECRET||'supersecret'
+    secret:process.env.SECRET || 'supersecret'
 
 };
