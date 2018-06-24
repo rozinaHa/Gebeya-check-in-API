@@ -18,9 +18,6 @@ var VisitorSchema = new Schema({
   company_name: {
     type: String
   },
-  company_website: {
-    type: String
-  },
   school_name: {
     type:String
   },
@@ -28,7 +25,10 @@ var VisitorSchema = new Schema({
     type: String,
     require: 'enter gender of a visitor'
   },
-  email_or_phone: {
+  email: {
+    type: String
+  },
+  phone: {
     type: String,
     required: 'Kindly enter the email or phone number of the visitor'
   },
