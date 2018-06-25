@@ -7,7 +7,7 @@ var config = require('../config');
 exports.list_all_users = function(req,res){
   User.find({},{password:0},function(err,user){
     if(err)
-      res.send(err);
+      res.status(500).send(err);
     res.json(user);
   });
 };

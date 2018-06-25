@@ -6,7 +6,7 @@ var visitor = mongoose.model('Visitors');
 exports.list_all_visitors = function(req,res,next){
   visitor.find({},function(err,visitor){
     if(err)
-      res.send(err);
+      res.status(500).send(err);
     res.json(visitor);
   });
 };
