@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var schedule = mongoose.model('Scheduled');
+var Visitor = mongoose.model('Visitors');
 
 //list all schedules
 exports.list_all_schedule = function(req,res){
@@ -23,14 +24,23 @@ exports.list_all_schedule_of_a_visitor = function(req,res){
 
 //create a new schedule
 exports.create_a_schedule = function(req,res){
-    var new_schedule = new schedule(req.body);
-    new_schedule.visitorsID = req.params.visitorId;
-    new_schedule.save(function(err,schedule){
-        if(err){
-            res.send(err);
+
+    visitor.findById(req.params.visitorId, function(err, visitor) {
+        if (err)
+            res.status(500).send(err);
+        else if(!visitor) res.status(404).send('no user found');
+        else {
+            var new_schedule = new schedule(req.body);
+            new_schedule.visitorsID = req.params.visitorId;
+            new_schedule.save(function(err,schedule){
+                if(err){
+                    res.status(500).send(err);
+                }
+                else res.status(200).json(schedule);
+            });
         }
-        res.json(schedule);
-    });
+  });
+    
 };
 
 //update a schedule
@@ -47,9 +57,9 @@ exports.update_a_schedule = function(req,res){
 exports.read_a_schedule = function(req,res){
     schedule.find({_id: req.params.scheduleId},function(err,schedule){
         if(err){
-            res.send(err);
+            res.status(500).send(err);
         }
-        res.json(schedule);
+        else res.status(200).json(schedule);
     });
 };
 

@@ -17,28 +17,32 @@ exports.create_a_visitor = function(req,res,next){
   new_visitor.scanned_copy = "uploads/" + req.file.filename;
   new_visitor.save(function(err, visitor) {
     if (err)
-      res.send(err);
-    res.json(visitor);
+      res.status(500).send(err);
+    else res.status(200).json(visitor);
   });
 };
 
 exports.update_a_visitor = function(req,res){
-  console.log(req.file.filename);
-  console.log(req.body);
-  req.body["scanned_copy"] = "uploads/" + req.file.filename;
+  
+  if(req.file){
+    req.body["scanned_copy"] = "uploads/" + req.file.filename;
+  }
+  
   console.log(req.body);
   visitor.findOneAndUpdate({_id: req.params.visitorId}, req.body, {new: true}, function(err, visitor) {
     if (err)
-      res.send(err);
-    res.json(visitor);
+      res.status(500).send(err);
+    else if(!visitor) res.status(404).send('no visitor found');
+    else res.status(200).json(visitor);
   });
 };
 
 exports.read_a_visitor = function(req, res) {
   visitor.findById(req.params.visitorId, function(err, visitor) {
     if (err)
-      res.send(err);
-    res.json(visitor);
+      res.status(500).send(err);
+    else if(!visitor) res.status(404).send('no user found');
+    else res.status(200).json(visitor);
   });
 };
 
@@ -50,7 +54,8 @@ exports.delete_a_visitor = function(req, res) {
     _id: req.params.visitorId
   }, function(err, visitor) {
     if (err)
-      res.send(err);
-    res.json({ message: 'Task successfully deleted' });
+      res.status(500).send(err);
+    else if(!visitor) res.status(404).send('no visitor found');
+    else res.status(200).json({ message: 'Task successfully deleted' });
   });
 };

@@ -30,9 +30,11 @@ exports.create_a_user = function(req,res){
 };
 
 exports.login_a_user = function(req,res){
+  console.log(req.body.password);
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) return res.status(500).send('Error on the server.');
     if (!user) return res.status(404).send('No user found.');
+    console.log(user.password);
     var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
     if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
     var token = jwt.sign({ id: user._id }, config.secret, {
@@ -45,10 +47,10 @@ exports.login_a_user = function(req,res){
 exports.read_a_user = function(req,res){
   User.findById(req.params.userId,{password:0},function(err,user){
     if(err){
-      res.status(500).send("Error on the server");
+      res.status(500).send("Error on the server or no invalid id");
     }
     else if (!user) res.status(404).send('No user found.');
-    res.status(200).send(user);
+    else res.status(200).send(user);
   });
 };
 
@@ -57,15 +59,16 @@ exports.update_a_user = function(req,res){
   req.body["password"] = hashedPassword;
   User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, function(err, user) {
     if (err)
-      res.send(err);
-    res.json(user);
+      res.status(404).send(err);
+      else res.json(user);
   });
 };
 
 exports.remove_a_user = function(req,res){
   User.remove({_id : req.params.userId},function(err,user){
-    if(err) res.status(500).send("error on the server!!");
-    if(!user) res.status(404).send('user not found!!');
-    res.status(200).send("user " + user.email + " is removed");
+    console.log(user);
+    if(err) res.status(500).send("error on the server or invalid id!!");
+    else if(!user) res.status(404).send('user not found!!');
+    else res.status(200).send("user is removed");
   });
 };

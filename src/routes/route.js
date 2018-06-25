@@ -33,7 +33,7 @@ module.exports = function(app){
 
     app.route('/users')
     .get(verifyToken,userController.list_all_users)
-    .post(verifyToken,userController.create_a_user);
+    .post(userController.create_a_user);
 
     app.route('/users/:userId')
     .get(verifyToken,userController.read_a_user)
