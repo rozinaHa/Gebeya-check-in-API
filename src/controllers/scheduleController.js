@@ -25,7 +25,7 @@ exports.list_all_schedule_of_a_visitor = function(req,res){
 //create a new schedule
 exports.create_a_schedule = function(req,res){
 
-    visitor.findById(req.params.visitorId, function(err, visitor) {
+    Visitor.findById(req.params.visitorId, function(err, visitor) {
         if (err)
             res.status(500).send(err);
         else if(!visitor) res.status(404).send('no user found');
@@ -45,11 +45,12 @@ exports.create_a_schedule = function(req,res){
 
 //update a schedule
 exports.update_a_schedule = function(req,res){
-    schedule.findOneAndUpdate({_id: req.params.scheduleId}, req.body,{new: true},function(err,schedule){
+    schedule.findOneAndUpdate({_id: req.params.scheduleId}, req.body,{new: false},function(err,schedule){
         if(err){
-            res.send(err);
+            res.status(500).send(err);
         }
-        res.json(schedule);
+        else if(!schedule) res.status(404).send("no schedule found");
+        else res.status(200).json(schedule);
     });
 };
 
@@ -65,6 +66,10 @@ exports.read_a_schedule = function(req,res){
 
 exports.delete_a_schedule = function(req,res){
     //to be done after deletion extent is known
-    
-    res.send("schedule is deleted");
+    schedule.remove({_id: req.params.scheduleId}, function(err, schedule) {
+    if (err)
+      res.status(500).send(err);
+    else if(!schedule) res.status(404).send('no schedule found');
+    else res.status(200).json({ message: 'schedule successfully deleted' });
+  });
 }

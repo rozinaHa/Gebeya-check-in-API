@@ -56,6 +56,6 @@ exports.delete_a_visitor = function(req, res) {
     if (err)
       res.status(500).send(err);
     else if(!visitor) res.status(404).send('no visitor found');
-    else res.status(200).json({ message: 'Task successfully deleted' });
+    else res.status(200).json({ message: 'Visitor successfully deleted' });
   });
 };
