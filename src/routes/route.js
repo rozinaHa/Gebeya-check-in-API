@@ -42,15 +42,15 @@ module.exports = function(app){
 
     app.post('/users/login',userController.login_a_user);
 
-    app.get('/schedule',schedule.list_all_schedule);
+    app.get('/schedule',verifyToken,schedule.list_all_schedule);
 
     app.route('/visitors/schedule/:visitorId')
-    .get(schedule.list_all_schedule_of_a_visitor)
-    .post(schedule.create_a_schedule);
+    .get(verifyToken,schedule.list_all_schedule_of_a_visitor)
+    .post(verifyToken,schedule.create_a_schedule);
 
     app.route('/schedule/:scheduleId')
-    .get(schedule.read_a_schedule)
-    .put(schedule.update_a_schedule)
-    .delete(schedule.delete_a_schedule);
+    .get(verifyToken,schedule.read_a_schedule)
+    .put(verifyToken,schedule.update_a_schedule)
+    .delete(verifyToken,schedule.delete_a_schedule);
 
 };
