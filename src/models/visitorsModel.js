@@ -22,31 +22,36 @@ var VisitorSchema = new Schema({
     type:String
   },
   Gender: {
-    type: String,
-    require: 'enter gender of a visitor'
+    type: String
+  },
+  trainee: {
+	type: String
   },
   email: {
     type: String
   },
   phone: {
     type: String,
-    required: 'Kindly enter the email or phone number of the visitor'
+    required: 'Kindly enter the phone number of the visitor'
+  },
+  field_of_work: {
+	type: String
   },
   reason: {
     type: String,
     required: 'kindly enter reason of visitation'
   },
   identification_type: {
-    type: String,
-    required: 'Kindly enter the identification type of the visitor'
+    type: String
   },
   identification_number: {
-    type: String,
-    required: 'Kindly enter the identification number of the visitor'
+    type: String
+  },
+  appWith: {
+	type:String
   },
   scanned_copy: {
-    type: String,
-    required: true
+    type: String
   },
   Created_date: {
     type: Date,

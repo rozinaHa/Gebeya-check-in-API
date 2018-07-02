@@ -13,8 +13,12 @@ exports.list_all_visitors = function(req,res,next){
 
 exports.create_a_visitor = function(req,res,next){
   var new_visitor = new visitor(req.body);
-  console.log("uploads/" + req.file.filename);
-  new_visitor.scanned_copy = "uploads/" + req.file.filename;
+  console.log(req.body.fname);
+  console.log(req.body);
+  if(req.file){
+	console.log("uploads/" + req.file.filename);
+	new_visitor.scanned_copy = "uploads/" + req.file.filename;
+  }
   new_visitor.save(function(err, visitor) {
     if (err)
       res.status(500).send(err);

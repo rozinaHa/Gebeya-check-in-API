@@ -7,6 +7,7 @@ var routes = require('./src/routes/route');
 var fs = require('fs');
 const path = require('path');
 var https = require('https');
+var cors = require('cors');
 
 // ~ loading configuration ~ //
 var config = require('./src/config');
@@ -22,6 +23,9 @@ var options = {
   key: fs.readFileSync(path.join(__dirname,'ssl','server.key')),
   cert: fs.readFileSync(path.join(__dirname,'ssl','server.crt'))
 };
+
+//middleware allow all origins
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
